@@ -1,10 +1,14 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import UserReservationsPage from './pages/UserReservationsPage';
+import UserList from './components/UserList';
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+export default function AppRoutes() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<UserList />} />
+        <Route path="/users/:userId/reservations" element={<UserReservationsPage />} />
+      </Routes>
+    </Router>
+  );
+}
