@@ -44,10 +44,13 @@ function CadastrarReserva() {
     }
 
     const data = {
-      usuarioId: usuarioId,
-      hotelId: hotelId,
-      diarias: Number(diarias),
-      precoTotal: Number(precoTotal),
+      "numeroDiaria": Number(diarias),
+      "valorTotal": Number(precoTotal),
+      "data": data,
+      "idHotel": hotelId,
+      "usuario": {
+        "id": usuarioId
+      }
     };
 
     setIsLoading(true);
