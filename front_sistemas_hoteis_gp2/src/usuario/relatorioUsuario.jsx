@@ -54,7 +54,7 @@ function RelatorioUsuario({ userId }) {
               primary={`Hotel: ${reserva.hotel.nome} | Diárias: ${reserva.diarias}`}
               secondary={`Data: ${new Date(reserva.data).toLocaleDateString(
                 "pt-BR"
-              )} | Preço Total: ${reserva.precoTotal.toLocaleString("pt-BR", {
+              )} | Preço Total: ${reserva.valorTotal.toLocaleString("pt-BR", {
                 style: "currency",
                 currency: "BRL",
               })}`}

@@ -53,10 +53,10 @@ function CancelarReserva() {
         {reservas.map((reserva) => (
           <ListItem key={reserva.id} divider>
             <ListItemText
-              primary={`Usuário: ${reserva.usuario.nome} | Hotel: ${reserva.hotel.nome}`}
+              primary={`Usuário: ${reserva.usuario.nome} | Hotel ID: ${reserva.idHotel}`}
               secondary={`Diárias: ${
-                reserva.diarias
-              } | Preço Total: R$ ${reserva.precoTotal.toLocaleString("pt-BR", {
+                reserva.numeroDiaria
+              } | Preço Total: R$ ${reserva.valorTotal.toLocaleString("pt-BR", {
                 style: "currency",
                 currency: "BRL",
               })}`}

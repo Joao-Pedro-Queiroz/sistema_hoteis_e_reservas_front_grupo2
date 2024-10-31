@@ -15,7 +15,7 @@ function CadastrarReserva() {
   const [usuarioId, setUsuarioId] = useState("");
   const [hotelId, setHotelId] = useState("");
   const [diarias, setDiarias] = useState("");
-  const [precoTotal, setPrecoTotal] = useState("");
+  const [valorTotal, setvalorTotal] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -38,19 +38,19 @@ function CadastrarReserva() {
   }
 
   function handleClick() {
-    if (!usuarioId || !hotelId || !diarias || !precoTotal) {
+    if (!usuarioId || !hotelId || !diarias || !valorTotal) {
       alert("Preencha todos os campos");
       return;
     }
 
     const data = {
-      "numeroDiaria": Number(diarias),
-      "valorTotal": Number(precoTotal),
-      "data": data,
-      "idHotel": hotelId,
-      "usuario": {
-        "id": usuarioId
-      }
+      numeroDiaria: Number(diarias),
+      valorTotal: Number(valorTotal),
+      data: new Date().toISOString(),
+      idHotel: hotelId,
+      usuario: {
+        id: usuarioId,
+      },
     };
 
     setIsLoading(true);
@@ -67,7 +67,7 @@ function CadastrarReserva() {
         setUsuarioId("");
         setHotelId("");
         setDiarias("");
-        setPrecoTotal("");
+        setvalorTotal("");
       })
       .catch((error) => {
         console.error(error);
@@ -127,8 +127,8 @@ function CadastrarReserva() {
           label="Preço Total"
           type="number"
           fullWidth
-          value={precoTotal}
-          onChange={(e) => setPrecoTotal(e.target.value)}
+          value={valorTotal}
+          onChange={(e) => setvalorTotal(e.target.value)}
         />
       </Grid>
 
