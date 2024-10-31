@@ -1,5 +1,5 @@
 import "./App.css";
-import { Link, Routes, Route } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import CancelarReserva from "./reserva/cancelarReserva";
 import CadastrarReserva from "./reserva/cadastrarReserva";
 import ListarReservas from "./reserva/listarReserva";
