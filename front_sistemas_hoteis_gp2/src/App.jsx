@@ -17,13 +17,16 @@ function App() {
         <Link to="/cadastrarUsuario">Cadastrar Usuário</Link>
             <br></br>
       <Link to="/cadastrarReserva">Cadastrar Reserva</Link>
+      <br></br>
       <Link to="/listarReservas">Listar Reservas</Link>
+      <br></br>
       <Link to="/cancelarReserva">Remover Reserva</Link>
+      <br></br>
       <Link to="/relatorioUsuario">Relatório de Usuário</Link>
       <br />
       <Routes>
           <Route path="/cadastrarUsuario" element={<UserRegister />} />
-        <Route path="/listarUsuario" element={<UserList />} />
+        <Route path="/listarUsuarios" element={<UserList />} />
         <Route path="/cadastrarReserva" element={<CadastrarReserva />} />
         <Route path="/listarReservas" element={<ListarReservas />} />
         <Route path="/cancelarReserva" element={<CancelarReserva />} />
