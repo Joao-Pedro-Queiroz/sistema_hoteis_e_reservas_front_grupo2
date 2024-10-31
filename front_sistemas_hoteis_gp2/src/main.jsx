@@ -1,14 +1,11 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import UserReservationsPage from './pages/UserReservationsPage';
-import UserList from './components/UserList';
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import App from './App.jsx'
+import './index.css'
+import { BrowserRouter } from 'react-router-dom'
 
-export default function AppRoutes() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<UserList />} />
-        <Route path="/users/:userId/reservations" element={<UserReservationsPage />} />
-      </Routes>
-    </Router>
-  );
-}
+createRoot(document.getElementById('root')).render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+)
