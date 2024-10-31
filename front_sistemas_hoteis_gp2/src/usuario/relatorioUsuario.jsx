@@ -5,12 +5,22 @@ import {
   List,
   ListItem,
   ListItemText,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
 } from "@mui/material";
 
-function RelatorioUsuario({ userId }) {
+function RelatorioUsuario() {
   const [reservas, setReservas] = useState([]);
-  const [usuario, setUsuario] = useState({});
+  const [usuarioNome, setUsuarioNome] = useState("");
   const [quantidadeReservas, setQuantidadeReservas] = useState(0);
+  const [usuarios, setUsuarios] = useState([]);
+  const [userId, setUserId] = useState("");
+
+  useEffect(() => {
+    loadUsuarios(); // Carregar a lista de usuários ao montar o componente
+  }, []);
 
   useEffect(() => {
     if (userId) {
@@ -18,8 +28,22 @@ function RelatorioUsuario({ userId }) {
     }
   }, [userId]);
 
+  function loadUsuarios() {
+    fetch("http://localhost:8080/api/v1/usuarios", { method: "GET" })
+      .then((response) => {
+        if (!response.ok) throw new Error("Erro ao carregar usuários");
+        return response.json();
+      })
+      .then((data) => {
+        setUsuarios(data); // Supondo que data seja uma lista de usuários
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  }
+
   function loadRelatorioUsuario(id) {
-    fetch(`http://localhost:8080/api/v1/reserva/usuario/${id}`, {
+    fetch(`http://localhost:8080/api/v1/usuarios/${id}/reservas`, {
       method: "GET",
     })
       .then((response) => {
@@ -28,11 +52,11 @@ function RelatorioUsuario({ userId }) {
         return response.json();
       })
       .then((data) => {
-        setUsuario(data.usuario);
+        setUsuarioNome(data.nomeUsuario);
         setReservas(
           data.reservas.sort((a, b) => new Date(a.data) - new Date(b.data))
         );
-        setQuantidadeReservas(data.reservas.length);
+        setQuantidadeReservas(data.totalReservas);
       })
       .catch((error) => {
         alert(error.message);
@@ -41,8 +65,24 @@ function RelatorioUsuario({ userId }) {
 
   return (
     <Container>
+      <FormControl fullWidth margin="normal">
+        <InputLabel id="usuario-select-label">Selecione um Usuário</InputLabel>
+        <Select
+          labelId="usuario-select-label"
+          value={userId}
+          onChange={(e) => setUserId(e.target.value)}
+        >
+          {usuarios.map((usuario) => (
+            <MenuItem key={usuario.id} value={usuario.id}>
+              {usuario.nome}{" "}
+              {/* Supondo que o objeto usuario tenha uma propriedade nome */}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
       <Typography variant="h4" gutterBottom>
-        Relatório de Reservas para {usuario.nome}
+        Relatório de Reservas para {usuarioNome}
       </Typography>
       <Typography variant="h6">
         Total de Reservas: {quantidadeReservas}
@@ -54,7 +94,7 @@ function RelatorioUsuario({ userId }) {
               primary={`Hotel: ${reserva.hotel.nome} | Diárias: ${reserva.diarias}`}
               secondary={`Data: ${new Date(reserva.data).toLocaleDateString(
                 "pt-BR"
-              )} | Preço Total: ${reserva.valorTotal.toLocaleString("pt-BR", {
+              )} | Preço Total: ${reserva.precoTotal.toLocaleString("pt-BR", {
                 style: "currency",
                 currency: "BRL",
               })}`}
