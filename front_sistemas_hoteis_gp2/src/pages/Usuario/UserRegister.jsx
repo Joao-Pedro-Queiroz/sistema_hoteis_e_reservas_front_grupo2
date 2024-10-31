@@ -9,7 +9,7 @@ function UserRegister() {
 
   const createUser = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/v1/usuarios", {
+      const response = await fetch("http://localhost:8080/api/v1/usuario", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

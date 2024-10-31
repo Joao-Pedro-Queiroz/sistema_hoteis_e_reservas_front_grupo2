@@ -1,12 +1,4 @@
 import { useEffect, useState } from "react";
-import {
-  Button,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-  Container,
-} from "@mui/material";
 
 function UserList() {
   const [usuarios, setUsuarios] = useState([]);
@@ -15,54 +7,62 @@ function UserList() {
     loadUsuarios();
   }, []);
 
-  const loadUsuarios = async () => {
-    try {
-      const response = await fetch("http://localhost:8080/api/v1/usuarios", {
-        method: "GET",
+  function loadUsuarios() {
+    fetch("http://localhost:8080/api/v1/usuario", {
+      method: "GET",
+    })
+      .then(response => {
+        if (!response.ok) throw new Error("Erro ao listar os usuários");
+        return response.json();
+      })
+      .then(data => {
+        setUsuarios(data.content || data);
+      })
+      .catch(error => {
+        alert(error.message);
       });
-      if (!response.ok) throw new Error("Erro ao carregar usuários");
-      const data = await response.json();
-      setUsuarios(data);
-    } catch (error) {
-      alert(error.message);
-    }
-  };
+  }
 
-  const deleteUser = async (id) => {
-    try {
-      const response = await fetch(`http://localhost:8080/api/v1/usuarios/${id}`, {
-        method: "DELETE",
+  function deleteUser(id) {
+    fetch(`http://localhost:8080/api/v1/usuario/${id}`, {
+      method: "DELETE",
+    })
+      .then(response => {
+        if (!response.ok) throw new Error("Erro ao excluir usuário");
+        loadUsuarios(); // Recarregar a lista após exclusão
+      })
+      .catch(error => {
+        alert(error.message);
       });
-      if (!response.ok) throw new Error("Erro ao excluir usuário");
-      loadUsuarios();
-    } catch (error) {
-      alert(error.message);
-    }
-  };
+  }
 
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>
-        Lista de Usuários
-      </Typography>
-      <List>
-        {usuarios.map((usuario) => (
-          <ListItem key={usuario.id} divider>
-            <ListItemText
-              primary={`Nome: ${usuario.nome}`}
-              secondary={`Email: ${usuario.email} | Telefone: ${usuario.telefone} | Endereço: ${usuario.endereco}`}
-            />
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={() => deleteUser(usuario.id)}
-            >
-              Excluir
-            </Button>
-          </ListItem>
-        ))}
-      </List>
-    </Container>
+    <>
+      <table>
+        <thead>
+          <tr>
+            <td>Nome</td>
+            <td>Endereço</td>
+            <td>Email</td>
+            <td>Telefone</td>
+            <td>Ações</td> {/* Coluna para o botão de excluir */}
+          </tr>
+        </thead>
+        <tbody>
+          {usuarios.map((usuario) => (
+            <tr key={usuario.id}>
+              <td>{usuario.nome}</td>
+              <td>{usuario.endereco}</td>
+              <td>{usuario.email}</td>
+              <td>{usuario.telefone}</td>
+              <td>
+                <button onClick={() => deleteUser(usuario.id)}>Excluir</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
   );
 }
 
