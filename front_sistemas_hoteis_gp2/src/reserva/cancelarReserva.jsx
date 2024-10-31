@@ -32,7 +32,7 @@ function CancelarReserva() {
   }
 
   function cancelReservation(id) {
-    fetch(`http://localhost:8080/api/v1/reservas/${id}`, {
+    fetch(`http://localhost:8080/api/v1/reserva/${id}`, {
       method: "DELETE",
     })
       .then((response) => {

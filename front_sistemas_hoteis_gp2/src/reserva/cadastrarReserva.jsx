@@ -23,27 +23,21 @@ function CadastrarReserva() {
     fetchHoteis();
   }, []);
 
-  const fetchUsuarios = async () => {
-    try {
-      const response = await fetch("http://localhost:8080/api/v1/usuarios");
-      const data = await response.json();
-      setUsuarios(data);
-    } catch (error) {
-      console.error("Erro ao carregar usuários:", error);
-    }
-  };
+  function fetchUsuarios() {
+    fetch("http://localhost:8080/api/v1/usuario")
+      .then((response) => response.json())
+      .then((data) => setUsuarios(data))
+      .catch((error) => console.error("Erro ao carregar usuários:", error));
+  }
 
-  const fetchHoteis = async () => {
-    try {
-      const response = await fetch("http://localhost:8080/api/v1/hoteis");
-      const data = await response.json();
-      setHoteis(data);
-    } catch (error) {
-      console.error("Erro ao carregar hotéis:", error);
-    }
-  };
+  function fetchHoteis() {
+    fetch("http://localhost:8080/api/v1/hoteis")
+      .then((response) => response.json())
+      .then((data) => setHoteis(data))
+      .catch((error) => console.error("Erro ao carregar hotéis:", error));
+  }
 
-  const handleClick = () => {
+  function handleClick() {
     if (!usuarioId || !hotelId || !diarias || !precoTotal) {
       alert("Preencha todos os campos");
       return;
@@ -57,7 +51,7 @@ function CadastrarReserva() {
     };
 
     setIsLoading(true);
-    fetch("http://localhost:8080/api/v1/reservas", {
+    fetch("http://localhost:8080/api/v1/reserva", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -77,7 +71,7 @@ function CadastrarReserva() {
         alert("Erro no cadastro da reserva");
       })
       .finally(() => setIsLoading(false));
-  };
+  }
 
   return (
     <Grid container spacing={2}>
