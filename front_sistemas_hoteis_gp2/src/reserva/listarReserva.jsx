@@ -13,7 +13,7 @@ function ListarReservas() {
     })
       .then((response) => response.json())
       .then((data) => {
-        setReservas(data.content || data); // Use data.content if API response has a 'content' field
+        setReservas(data.content || data);
       })
       .catch((error) => {
         console.error("Erro ao listar as reservas:", error);
