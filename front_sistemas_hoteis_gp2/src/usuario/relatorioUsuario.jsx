@@ -19,7 +19,7 @@ function RelatorioUsuario({ userId }) {
   }, [userId]);
 
   function loadRelatorioUsuario(id) {
-    fetch(`http://localhost:8080/api/v1/usuarios/${id}/reservas`, {
+    fetch(`http://localhost:8080/api/v1/reserva/usuario/${id}`, {
       method: "GET",
     })
       .then((response) => {
