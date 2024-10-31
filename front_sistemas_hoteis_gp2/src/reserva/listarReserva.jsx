@@ -26,24 +26,26 @@ function ListarReservas() {
       <table>
         <thead>
           <tr>
-            <th>Usuário</th>
-            <th>Hotel</th>
             <th>Número de Diárias</th>
-            <th>Preço Total</th>
+            <th>Valor Total</th>
+            <th>Data</th>
+            <th>Id do Hotel</th>
+            <th>Usuário</th>
           </tr>
         </thead>
         <tbody>
           {reservas.map((reserva, index) => (
             <tr key={index}>
-              <td>{reserva.usuario.nome}</td>
-              <td>{reserva.hotel.nome}</td>
-              <td>{reserva.diarias}</td>
+              <td>{reserva.numeroDiaria}</td>
               <td>
-                {reserva.precoTotal.toLocaleString("pt-BR", {
+                {reserva.valorTotal.toLocaleString("pt-BR", {
                   style: "currency",
                   currency: "BRL",
                 })}
               </td>
+              <td>{reserva.data}</td>
+              <td>{reserva.idHotel}</td>
+              <td>{reserva.usuario.nome}</td>
             </tr>
           ))}
         </tbody>
