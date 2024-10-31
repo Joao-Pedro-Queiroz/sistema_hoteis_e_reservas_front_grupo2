@@ -8,7 +8,7 @@ function ListarReservas() {
   }, []);
 
   function load() {
-    fetch("http://localhost:8080/api/v1/reservas", {
+    fetch("http://localhost:8080/api/v1/reserva", {
       method: "GET",
     })
       .then((response) => response.json())
