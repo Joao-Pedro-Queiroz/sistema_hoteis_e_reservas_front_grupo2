@@ -38,25 +38,25 @@ function UserList() {
 
   return (
     <>
-      <table>
+      <table style={{ width: "100%", borderCollapse: "collapse" }}>
         <thead>
           <tr>
-            <td>Nome</td>
-            <td>Endereço</td>
-            <td>Email</td>
-            <td>Telefone</td>
-            <td>Ações</td> {/* Coluna para o botão de excluir */}
+            <td style={{ color: "black" }}>Nome</td>
+            <td style={{ color: "black" }}>Endereço</td>
+            <td style={{ color: "black" }}>Email</td>
+            <td style={{ color: "black" }}>Telefone</td>
+            <td style={{ color: "black" }}>Ações</td>
           </tr>
         </thead>
         <tbody>
           {usuarios.map((usuario) => (
             <tr key={usuario.id}>
-              <td>{usuario.nome}</td>
-              <td>{usuario.endereco}</td>
-              <td>{usuario.email}</td>
-              <td>{usuario.telefone}</td>
+              <td style={{ color: "black" }}>{usuario.nome}</td>
+              <td style={{ color: "black" }}>{usuario.endereco}</td>
+              <td style={{ color: "black" }}>{usuario.email}</td>
+              <td style={{ color: "black" }}>{usuario.telefone}</td>
               <td>
-                <button onClick={() => deleteUser(usuario.id)}>Excluir</button>
+                <button onClick={() => deleteUser(usuario.id)} >Excluir</button>
               </td>
             </tr>
           ))}

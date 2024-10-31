@@ -9,6 +9,7 @@ function App() {
       <nav>
 
         <Link to="/listarUsuarios">Listar Usuários</Link> 
+        <br></br>
         <Link to="/cadastrarUsuario">Cadastrar Usuário</Link>
       </nav>
       <br />

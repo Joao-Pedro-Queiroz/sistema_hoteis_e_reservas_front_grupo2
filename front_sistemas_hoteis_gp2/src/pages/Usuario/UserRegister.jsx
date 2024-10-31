@@ -1,30 +1,14 @@
 import { useState } from "react";
-import { Button, TextField, Typography, Container } from "@mui/material";
+import { Container, Typography, TextField, Button } from "@mui/material";
 
-function UserRegister() {
+function CadastrarUsuario() {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [telefone, setTelefone] = useState("");
   const [endereco, setEndereco] = useState("");
 
-  const createUser = async () => {
-    try {
-      const response = await fetch("http://localhost:8080/api/v1/usuario", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ nome, email, telefone, endereco }),
-      });
-      if (!response.ok) throw new Error("Erro ao cadastrar usuário");
-      alert("Usuário cadastrado com sucesso!");
-      setNome("");
-      setEmail("");
-      setTelefone("");
-      setEndereco("");
-    } catch (error) {
-      alert(error.message);
-    }
+  const createUser = () => {
+    // Função para criar usuário
   };
 
   return (
@@ -38,6 +22,9 @@ function UserRegister() {
         margin="normal"
         value={nome}
         onChange={(e) => setNome(e.target.value)}
+        InputProps={{
+          style: { backgroundColor: "white", color: "black" }, // Definindo a cor de fundo e texto
+        }}
       />
       <TextField
         label="Email"
@@ -45,6 +32,9 @@ function UserRegister() {
         margin="normal"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        InputProps={{
+          style: { backgroundColor: "white", color: "black" },
+        }}
       />
       <TextField
         label="Telefone"
@@ -52,6 +42,9 @@ function UserRegister() {
         margin="normal"
         value={telefone}
         onChange={(e) => setTelefone(e.target.value)}
+        InputProps={{
+          style: { backgroundColor: "white", color: "black" },
+        }}
       />
       <TextField
         label="Endereço"
@@ -59,6 +52,9 @@ function UserRegister() {
         margin="normal"
         value={endereco}
         onChange={(e) => setEndereco(e.target.value)}
+        InputProps={{
+          style: { backgroundColor: "white", color: "black" },
+        }}
       />
       <Button variant="contained" color="primary" onClick={createUser}>
         Cadastrar
@@ -67,4 +63,4 @@ function UserRegister() {
   );
 }
 
-export default UserRegister;
+export default CadastrarUsuario;
