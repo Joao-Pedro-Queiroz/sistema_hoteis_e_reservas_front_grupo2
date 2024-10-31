@@ -15,33 +15,34 @@ function CancelarReserva() {
     loadReservas();
   }, []);
 
-  const loadReservas = async () => {
-    try {
-      const response = await fetch("http://localhost:8080/api/v1/reservas", {
-        method: "GET",
+  function loadReservas() {
+    fetch("http://localhost:8080/api/v1/reservas", {
+      method: "GET",
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error("Erro ao carregar reservas");
+        return response.json();
+      })
+      .then((data) => {
+        setReservas(data.content || data);
+      })
+      .catch((error) => {
+        alert(error.message);
       });
-      if (!response.ok) throw new Error("Erro ao carregar reservas");
-      const data = await response.json();
-      setReservas(data);
-    } catch (error) {
-      alert(error.message);
-    }
-  };
+  }
 
-  const cancelReservation = async (id) => {
-    try {
-      const response = await fetch(
-        `http://localhost:8080/api/v1/reservas/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
-      if (!response.ok) throw new Error("Erro ao cancelar reserva");
-      loadReservas();
-    } catch (error) {
-      alert(error.message);
-    }
-  };
+  function cancelReservation(id) {
+    fetch(`http://localhost:8080/api/v1/reservas/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error("Erro ao cancelar reserva");
+        loadReservas();
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  }
 
   return (
     <Container>
@@ -53,7 +54,12 @@ function CancelarReserva() {
           <ListItem key={reserva.id} divider>
             <ListItemText
               primary={`Usuário: ${reserva.usuario.nome} | Hotel: ${reserva.hotel.nome}`}
-              secondary={`Diárias: ${reserva.numeroDiarias} | Preço Total: R$ ${reserva.precoTotal}`}
+              secondary={`Diárias: ${
+                reserva.diarias
+              } | Preço Total: R$ ${reserva.precoTotal.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              })}`}
             />
             <Button
               variant="contained"
