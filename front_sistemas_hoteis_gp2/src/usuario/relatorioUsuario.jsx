@@ -29,9 +29,14 @@ function RelatorioUsuario() {
   }, [userId]);
 
   function loadUsuarios() {
-    fetch("http://localhost:8080/api/v1/usuarios", { method: "GET" })
+    fetch("http://localhost:8080/api/v1/usuarios", {
+      method: "GET",
+    })
       .then((response) => {
-        if (!response.ok) throw new Error("Erro ao carregar usuários");
+        if (!response.ok) {
+          // Verifique se a resposta não foi ok
+          throw new Error(`Erro ao carregar usuários: ${response.statusText}`);
+        }
         return response.json();
       })
       .then((data) => {
