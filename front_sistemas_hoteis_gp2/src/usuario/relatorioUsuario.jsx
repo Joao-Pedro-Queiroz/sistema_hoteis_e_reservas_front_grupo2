@@ -48,7 +48,7 @@ function RelatorioUsuario() {
   }
 
   function loadRelatorioUsuario(id) {
-    fetch(`http://localhost:8080/api/v1/usuario/reserva/${id}`, {
+    fetch(`http://localhost:8080/api/v1/reserva/usuario/${id}`, {
       method: "GET",
     })
       .then((response) => {
@@ -96,10 +96,10 @@ function RelatorioUsuario() {
         {reservas.map((reserva) => (
           <ListItem key={reserva.id} divider>
             <ListItemText
-              primary={`Hotel: ${reserva.hotel.nome} | Diárias: ${reserva.diarias}`}
+              primary={`Hotel: ${reserva.idHotel} | Diárias: ${reserva.diarias}`}
               secondary={`Data: ${new Date(reserva.data).toLocaleDateString(
                 "pt-BR"
-              )} | Preço Total: ${reserva.precoTotal.toLocaleString("pt-BR", {
+              )} | Preço Total: ${reserva.valorTotal.toLocaleString("pt-BR", {
                 style: "currency",
                 currency: "BRL",
               })}`}
