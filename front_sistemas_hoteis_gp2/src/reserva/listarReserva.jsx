@@ -22,35 +22,46 @@ function ListarReserva() {
       });
   }
 
+  function deletarReserva(id) {
+    fetch(`http://localhost:8080/api/v1/reserva/${id}`, {
+      method: "DELETE",
+    }).then(response => {
+      load();
+    }).catch(response => {
+      alert("Erro no exclusão da reserva")
+    })
+
+  }
+
   return (
     <>
-      <Typography variant="h4" gutterBottom> Reservas Cadastradqs </Typography>
+      <Typography variant="h4" gutterBottom> Reservas Cadastradas </Typography>
       <table>
-        <thead>
-          <tr>
-            <th>Número de Diárias</th>
-            <th>Valor Total</th>
-            <th>Data</th>
-            <th>Id do Hotel</th>
-            <th>Usuário</th>
+        <tr>
+          <td>Número de Diárias</td>
+          <td>Valor Total</td>
+          <td>Data</td>
+          <td>Id do Hotel</td>
+          <td>Usuário</td>
+          <td>Ações</td>
+        </tr>
+        {reservas.map((reserva, index) => (
+          <tr key={index}>
+            <td>{reserva.numeroDiaria}</td>
+            <td>
+              {reserva.valorTotal.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              })}
+            </td>
+            <td>{reserva.data}</td>
+            <td>{reserva.idHotel}</td>
+            <td>{reserva.usuario.nome}</td>
+            <td>
+              <button onClick={() => deletarReserva(reserva.id)} >Excluir</button>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          {reservas.map((reserva, index) => (
-            <tr key={index}>
-              <td>{reserva.numeroDiaria}</td>
-              <td>
-                {reserva.valorTotal.toLocaleString("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
-                })}
-              </td>
-              <td>{reserva.data}</td>
-              <td>{reserva.idHotel}</td>
-              <td>{reserva.usuario.nome}</td>
-            </tr>
-          ))}
-        </tbody>
+        ))}
       </table>
     </>
   );

@@ -32,6 +32,7 @@ function ListarUsuario() {
     })
 
   }
+  
   return (
     <>
       <Typography variant="h4" gutterBottom> Usuários Cadastrados </Typography>
