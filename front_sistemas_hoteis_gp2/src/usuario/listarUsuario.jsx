@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function UserList() {
+function ListarUsuario() {
   const [usuarios, setUsuarios] = useState([]);
 
   useEffect(() => {
@@ -66,4 +66,4 @@ function UserList() {
   );
 }
 
-export default UserList;
+export default ListarUsuario;

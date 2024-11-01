@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function ListarReservas() {
+function ListarReserva() {
   const [reservas, setReservas] = useState([]);
 
   useEffect(() => {
@@ -54,4 +54,4 @@ function ListarReservas() {
   );
 }
 
-export default ListarReservas;
+export default ListarReserva;
