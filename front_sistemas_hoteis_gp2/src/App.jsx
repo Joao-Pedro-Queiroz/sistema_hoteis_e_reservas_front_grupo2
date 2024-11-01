@@ -1,8 +1,8 @@
 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
-import UserList from "./pages/Usuario/UserList";
-import UserRegister from "./pages/Usuario/UserRegister";
+import UserList from "./usuario/UserList";
+import UserRegister from "./usuario/UserRegister";
 import CancelarReserva from "./reserva/cancelarReserva";
 import CadastrarReserva from "./reserva/cadastrarReserva";
 import ListarReservas from "./reserva/listarReserva";
