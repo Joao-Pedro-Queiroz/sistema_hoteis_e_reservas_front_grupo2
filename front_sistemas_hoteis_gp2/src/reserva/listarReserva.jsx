@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 function ListarReserva() {
@@ -23,6 +24,7 @@ function ListarReserva() {
 
   return (
     <>
+      <Typography variant="h4" gutterBottom> Reservas Cadastradqs </Typography>
       <table>
         <thead>
           <tr>
