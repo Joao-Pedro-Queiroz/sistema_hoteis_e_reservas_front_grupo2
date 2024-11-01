@@ -19,7 +19,7 @@ function RelatorioUsuario() {
   const [userId, setUserId] = useState("");
 
   useEffect(() => {
-    loadUsuarios(); // Carregar a lista de usuários ao montar o componente
+    loadUsuarios();
   }, []);
 
   useEffect(() => {
@@ -29,43 +29,34 @@ function RelatorioUsuario() {
   }, [userId]);
 
   function loadUsuarios() {
+
     fetch("http://localhost:8080/api/v1/usuario", {
-      method: "GET",
+      method: 'GET',
+    }).then(response => {
+      return response.json()
+    }).then(data => {
+      setUsuarios(data.content)
+    }).catch(response => {
+      alert("Erro ao listar os usuários")
     })
-      .then((response) => {
-        if (!response.ok) {
-          // Verifique se a resposta não foi ok
-          throw new Error(`Erro ao carregar usuários: ${response.statusText}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setUsuarios(data); // Supondo que data seja uma lista de usuários
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+ 
   }
 
   function loadRelatorioUsuario(id) {
     fetch(`http://localhost:8080/api/v1/reserva/usuario/${id}`, {
       method: "GET",
-    })
-      .then((response) => {
-        if (!response.ok)
-          throw new Error("Erro ao carregar relatório do usuário");
+    }).then((response) => {
         return response.json();
-      })
-      .then((data) => {
+      }).then((data) => {
         setUsuarioNome(data.nomeUsuario);
         setReservas(
           data.reservas.sort((a, b) => new Date(a.data) - new Date(b.data))
         );
         setQuantidadeReservas(data.totalReservas);
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+      }).catch(response => {
+      alert("Erro ao carregar relatório do usuário")
+    })
+ 
   }
 
   return (
@@ -79,8 +70,7 @@ function RelatorioUsuario() {
         >
           {usuarios.map((usuario) => (
             <MenuItem key={usuario.id} value={usuario.id}>
-              {usuario.nome}{" "}
-              {/* Supondo que o objeto usuario tenha uma propriedade nome */}
+              {usuario.nome}
             </MenuItem>
           ))}
         </Select>
