@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 function ListarUsuario() {
@@ -38,6 +39,7 @@ function ListarUsuario() {
 
   return (
     <>
+      <Typography variant="h4" gutterBottom> Usuários Cadastrados </Typography>
       <table style={{ width: "100%", borderCollapse: "collapse" }}>
         <thead>
           <tr>

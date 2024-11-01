@@ -34,9 +34,7 @@ function CadastrarUsuario() {
     <>
     <Grid container spacing={2}>
      <Grid item xs={12}>
-       <Typography variant="h4" gutterBottom>
-         Cadastrar Usuário
-       </Typography>
+      <Typography variant="h4" gutterBottom> Cadastrar Usuário </Typography>
      </Grid>
      <Grid item xs={12}>
      <TextField label="Nome: " value={nome} onChange={e => setNome(e.target.value)}/>
