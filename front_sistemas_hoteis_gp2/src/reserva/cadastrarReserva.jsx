@@ -33,7 +33,7 @@ function CadastrarReserva() {
     }).then(response => {
       return response.json()
     }).then(data => {
-      setUsuarios(data.content)
+      setHoteis(data.content)
     }).catch(response => {
       alert("Erro ao listar os hoteis")
     })
@@ -70,64 +70,28 @@ function CadastrarReserva() {
     <>
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <FormControl fullWidth>
-          <InputLabel>Usuário</InputLabel>
-          <Select
-            value={usuarioId}
-            onChange={(e) => setUsuarioId(e.target.value)}
-            label="Usuário"
-          >
-            {usuarios.map((usuario) => (
-              <MenuItem key={usuario.id} value={usuario.id}>
-                {usuario.nome}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Grid>
-
-      <Grid item xs={12}>
-        <FormControl fullWidth>
-          <InputLabel>Hotel</InputLabel>
-          <Select
-            value={hotelId}
-            onChange={(e) => setHotelId(e.target.value)}
-            label="Hotel"
-          >
-            {hoteis.map((hotel) => (
-              <MenuItem key={hotel.id} value={hotel.id}>
-                {hotel.nome}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Grid>
-
-      <Grid item xs={12}>
-        <TextField
-          label="Número de Diárias"
-          type="number"
-          fullWidth
-          value={diarias}
-          onChange={(e) => setDiarias(e.target.value)}
-        />
-      </Grid>
-
-      <Grid item xs={12}>
-        <TextField
-          label="Preço Total"
-          type="number"
-          fullWidth
-          value={valorTotal}
-          onChange={(e) => setvalorTotal(e.target.value)}
-        />
-      </Grid>
-
-      <Grid item xs={12}>
-        <Button onClick={() => handleClick()} variant="contained">
-          Cadastrar Reserva
-        </Button>
-      </Grid>
+     <TextField label="Numero de Diárias: " value={diarias} onChange={e => setDiarias(e.target.value)}/>
+     </Grid>
+     <Grid item xs={12}>
+     <TextField label="Valor Total: " value={valorTotal} onChange={e => setvalorTotal(e.target.value)}/>
+     </Grid>
+     <Grid item xs={12}>
+     <Select label="Id do Hotel: " value={hotelId} onChange={e => setHotelId(e.target.value)}>
+         {hoteis.map((hotel, index) => {
+          return <MenuItem value={hotel.id}>{hotel.nome}</MenuItem>
+        })}
+     </Select>
+     </Grid>
+     <Grid item xs={12}>
+     <Select label="Id do Usuário: " value={usuarioId} onChange={e => setHotelId(e.target.value)}>
+         {usuarios.map((usuario, index) => {
+          return <MenuItem value={usuario.id}>{usuario.nome}</MenuItem>
+        })}
+     </Select>
+     </Grid>
+     <Grid item xs={12}>
+     <Button onClick={() => handleClick()} variant='contained'>Cadastrar Reserva</Button>
+     </Grid>
     </Grid>
     </>
   );
