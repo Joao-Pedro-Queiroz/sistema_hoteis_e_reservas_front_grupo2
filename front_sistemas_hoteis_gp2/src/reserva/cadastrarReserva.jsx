@@ -1,13 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  Button,
-  Grid,
-  TextField,
-  MenuItem,
-  Select,
-  InputLabel,
-  FormControl,
-} from "@mui/material";
+import { Button, Grid, TextField, MenuItem, Select, InputLabel, FormControl, } from "@mui/material";
 
 function CadastrarReserva() {
   const [usuarios, setUsuarios] = useState([]);
@@ -16,7 +8,6 @@ function CadastrarReserva() {
   const [hotelId, setHotelId] = useState("");
   const [diarias, setDiarias] = useState("");
   const [valorTotal, setvalorTotal] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     fetchUsuarios();
@@ -24,24 +15,32 @@ function CadastrarReserva() {
   }, []);
 
   function fetchUsuarios() {
-    fetch("http://localhost:8080/api/v1/usuario")
-      .then((response) => response.json())
-      .then((data) => setUsuarios(data))
-      .catch((error) => console.error("Erro ao carregar usuários:", error));
+    fetch("http://localhost:8080/api/v1/usuario", {
+      method: 'GET',
+    }).then(response => {
+      return response.json()
+    }).then(data => {
+      setUsuarios(data.content)
+    }).catch(response => {
+      alert("Erro ao listar os usuários")
+    })
+ 
   }
 
   function fetchHoteis() {
-    fetch("http://localhost:8080/api/v1/hoteis")
-      .then((response) => response.json())
-      .then((data) => setHoteis(data))
-      .catch((error) => console.error("Erro ao carregar hotéis:", error));
+    fetch("http://localhost:8080/api/v1/hoteis", {
+      method: 'GET',
+    }).then(response => {
+      return response.json()
+    }).then(data => {
+      setUsuarios(data.content)
+    }).catch(response => {
+      alert("Erro ao listar os hoteis")
+    })
+ 
   }
 
   function handleClick() {
-    if (!usuarioId || !hotelId || !diarias || !valorTotal) {
-      alert("Preencha todos os campos");
-      return;
-    }
 
     const data = {
       numeroDiaria: Number(diarias),
@@ -53,30 +52,22 @@ function CadastrarReserva() {
       },
     };
 
-    setIsLoading(true);
     fetch("http://localhost:8080/api/v1/reserva", {
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify(data),
       headers: {
-        "Content-Type": "application/json",
-      },
+        "Content-Type": 'application/json'
+      }
+    }).then(response => {
+      alert("Reserva cadastrada com sucesso")
+    }).catch(response => {
+      alert("Erro no cadastro da reserva")
     })
-      .then((response) => {
-        if (!response.ok) throw new Error("Erro no cadastro da reserva");
-        alert("Reserva cadastrada com sucesso");
-        setUsuarioId("");
-        setHotelId("");
-        setDiarias("");
-        setvalorTotal("");
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("Erro no cadastro da reserva");
-      })
-      .finally(() => setIsLoading(false));
+
   }
 
   return (
+    <>
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <FormControl fullWidth>
@@ -133,11 +124,12 @@ function CadastrarReserva() {
       </Grid>
 
       <Grid item xs={12}>
-        <Button onClick={handleClick} variant="contained" disabled={isLoading}>
-          {isLoading ? "Cadastrando..." : "Cadastrar Reserva"}
+        <Button onClick={() => handleClick()} variant="contained">
+          Cadastrar Reserva
         </Button>
       </Grid>
     </Grid>
+    </>
   );
 }
 
