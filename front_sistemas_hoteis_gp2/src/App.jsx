@@ -18,6 +18,7 @@ function App() {
       <Link to="/listarReservas">Listar Reservas</Link><br/>
       <Link to="/cancelarReserva">Remover Reserva</Link><br/>
       <Link to="/relatorioUsuario">Relatório de Usuário</Link><br/>
+      <br/>
 
       <Routes>
         <Route path="/cadastrarUsuario" element={<CadastrarUsuario/>}></Route>
