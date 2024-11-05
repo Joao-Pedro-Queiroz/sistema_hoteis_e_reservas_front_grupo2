@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 
 function ListarReserva() {
@@ -36,33 +36,41 @@ function ListarReserva() {
   return (
     <>
       <Typography variant="h4" gutterBottom> Reservas Cadastradas </Typography>
-      <table>
-        <tr>
-          <td>Número de Diárias</td>
-          <td>Valor Total</td>
-          <td>Data</td>
-          <td>Id do Hotel</td>
-          <td>Usuário</td>
-          <td>Ações</td>
-        </tr>
-        {reservas.map((reserva, index) => (
-          <tr key={index}>
-            <td>{reserva.numeroDiaria}</td>
-            <td>
-              {reserva.valorTotal.toLocaleString("pt-BR", {
-                style: "currency",
-                currency: "BRL",
-              })}
-            </td>
-            <td>{reserva.data}</td>
-            <td>{reserva.idHotel}</td>
-            <td>{reserva.usuario.nome}</td>
-            <td>
-              <button onClick={() => deletarReserva(reserva.id)} >Excluir</button>
-            </td>
-          </tr>
-        ))}
-      </table>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650, border: 1, borderColor: 'divider' }}>
+          <TableHead>
+            <TableRow>
+              <TableCell sx={{ borderRight: 1, borderColor: 'divider' }}>Número de Diárias</TableCell>
+              <TableCell sx={{ borderRight: 1, borderColor: 'divider' }}>Valor Total</TableCell>
+              <TableCell sx={{ borderRight: 1, borderColor: 'divider' }}>Data</TableCell>
+              <TableCell sx={{ borderRight: 1, borderColor: 'divider' }}>Id do Hotel</TableCell>
+              <TableCell sx={{ borderRight: 1, borderColor: 'divider' }}>Usuário</TableCell>
+              <TableCell sx={{ borderRight: 1, borderColor: 'divider' }}>Ações</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {reservas.map((reserva, index) => (
+              <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                <TableCell sx={{ borderRight: 1, borderColor: 'divider' }}>{reserva.numeroDiaria}</TableCell>
+                <TableCell sx={{ borderRight: 1, borderColor: 'divider' }}>
+                  {reserva.valorTotal.toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  })}
+                </TableCell>
+                <TableCell sx={{ borderRight: 1, borderColor: 'divider' }}>{reserva.data}</TableCell>
+                <TableCell sx={{ borderRight: 1, borderColor: 'divider' }}>{reserva.idHotel}</TableCell>
+                <TableCell sx={{ borderRight: 1, borderColor: 'divider' }}>{reserva.usuario.nome}</TableCell>
+                <TableCell>
+                  <Button variant="contained" color="secondary" onClick={() => deletarReserva(reserva.id)}>
+                    Excluir
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </>
   );
 }
