@@ -28,12 +28,12 @@ function CadastrarReserva() {
   }
 
   function fetchHoteis() {
-    fetch("http://localhost:8080/api/v1/hoteis", {
+    fetch("http://localhost:8081/api/hotels", {
       method: 'GET',
     }).then(response => {
       return response.json()
     }).then(data => {
-      setHoteis(data.content)
+      setHoteis(data)
     }).catch(response => {
       alert("Erro ao listar os hoteis")
     })
@@ -83,7 +83,7 @@ function CadastrarReserva() {
      </Select>
      </Grid>
      <Grid item xs={12}>
-     <Select label="Id do Usuário: " value={usuarioId} onChange={e => setHotelId(e.target.value)}>
+     <Select label="Id do Usuário: " value={usuarioId} onChange={e => setUsuarioId(e.target.value)}>
          {usuarios.map((usuario, index) => {
           return <MenuItem value={usuario.id}>{usuario.nome}</MenuItem>
         })}
