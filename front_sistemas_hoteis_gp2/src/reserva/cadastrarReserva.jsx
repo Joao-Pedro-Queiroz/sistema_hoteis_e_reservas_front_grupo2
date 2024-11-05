@@ -76,19 +76,25 @@ function CadastrarReserva() {
      <TextField label="Valor Total: " value={valorTotal} onChange={e => setvalorTotal(e.target.value)}/>
      </Grid>
      <Grid item xs={12}>
-     <Select label="Id do Hotel: " value={hotelId} onChange={e => setHotelId(e.target.value)}>
-         {hoteis.map((hotel, index) => {
-          return <MenuItem value={hotel.id}>{hotel.nome}</MenuItem>
-        })}
-     </Select>
-     </Grid>
-     <Grid item xs={12}>
-     <Select label="Id do Usuário: " value={usuarioId} onChange={e => setUsuarioId(e.target.value)}>
-         {usuarios.map((usuario, index) => {
-          return <MenuItem value={usuario.id}>{usuario.nome}</MenuItem>
-        })}
-     </Select>
-     </Grid>
+     <FormControl sx={{width:"28%"}}>
+          <InputLabel>Id do Hotel:</InputLabel>
+          <Select value={hotelId} onChange={e => setHotelId(e.target.value)} label="Id do Hotel">
+            {hoteis.map(hotel => (
+              <MenuItem key={hotel.id} value={hotel.id}>{hotel.nome}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Grid>
+      <Grid item xs={12}>
+        <FormControl sx={{width:"28%"}}>
+          <InputLabel>Id do Usuário:</InputLabel>
+          <Select value={usuarioId} onChange={e => setUsuarioId(e.target.value)} label="Id do Usuário">
+            {usuarios.map(usuario => (
+              <MenuItem key={usuario.id} value={usuario.id}>{usuario.nome}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Grid>
      <Grid item xs={12}>
      <Button onClick={() => handleClick()} variant='contained'>Cadastrar Reserva</Button>
      </Grid>
