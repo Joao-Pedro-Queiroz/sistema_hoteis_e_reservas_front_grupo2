@@ -86,7 +86,7 @@ function RelatorioUsuario() {
         {reservas.map((reserva) => (
           <ListItem key={reserva.id} divider>
             <ListItemText
-              primary={`Hotel: ${reserva.idHotel} | Diárias: ${reserva.diarias}`}
+              primary={`Hotel: ${reserva.idHotel} | Diárias: ${reserva.numeroDiaria}`}
               secondary={`Data: ${new Date(reserva.data).toLocaleDateString(
                 "pt-BR"
               )} | Preço Total: ${reserva.valorTotal.toLocaleString("pt-BR", {
